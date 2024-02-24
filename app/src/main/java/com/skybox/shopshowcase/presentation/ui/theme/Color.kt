@@ -1,4 +1,4 @@
-package com.skybox.shopshowcase.ui.theme
+package com.skybox.shopshowcase.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
