@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "productId": 1,
+      "name": "Laptop",
+      "description": "Powerful laptop for work and play",
+      "image": "laptop.jpg",
+      "price": 999.99,
+      "categories": [1, 2]
+    },
+    {
+      "productId": 2,
+      "name": "Smartphone",
+      "description": "High-performance smartphone with advanced features",
+      "image": "smartphone.jpg",
+      "price": 699.99,
+      "categories": [1, 3]
+    },
+    {
+      "productId": 3,
+      "name": "Headphones",
+      "description": "Premium noise-canceling headphones",
+      "image": "headphones.jpg",
+      "price": 199.99,
+      "categories": [2, 3]
+    },
+    {
+      "productId": 4,
+      "name": "Camera",
+      "description": "Professional DSLR camera with multiple lenses",
+      "image": "camera.jpg",
+      "price": 1499.99,
+      "categories": [1, 3]
+    }
+  ],
+  "categories": [
+    {
+      "categoryId": 1,
+      "categoryName": "Electronics"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Computers"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Gadgets"
+    }
+  ],
+  "productCategoryCrossRefs": [
+    {
+      "productId": 1,
+      "categoryId": 1
+    },
+    {
+      "productId": 1,
+      "categoryId": 2
+    },
+    {
+      "productId": 2,
+      "categoryId": 1
+    },
+    {
+      "productId": 2,
+      "categoryId": 3
+    },
+    {
+      "productId": 3,
+      "categoryId": 2
+    },
+    {
+      "productId": 3,
+      "categoryId": 3
+    },
+    {
+      "productId": 4,
+      "categoryId": 1
+    },
+    {
+      "productId": 4,
+      "categoryId": 3
+    }
+  ]
+}
