@@ -1,84 +1,102 @@
 package com.skybox.shopshowcase.presentation.ui.screens.home
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.rounded.ShoppingCart
-import androidx.compose.material3.Card
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.skybox.shopshowcase.domain.Product
-import com.skybox.shopshowcase.util.getSampleProducts
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.navArgument
+import com.skybox.shopshowcase.R
+import com.skybox.shopshowcase.presentation.ui.screens.cart.CartScreen
+import com.skybox.shopshowcase.presentation.ui.screens.feed.FeedScreen
+import com.skybox.shopshowcase.presentation.ui.screens.product.ProductScreen
 
-var items = getSampleProducts()
+sealed class Screen(val route: String, val icon: ImageVector, @StringRes val resourceId: Int) {
+    data object Feed : Screen("/", Icons.Filled.Home, R.string.home)
+    data object Cart : Screen("/cart", Icons.Filled.ShoppingCart, R.string.cart)
+}
+
+val items = listOf(
+    Screen.Feed,
+    Screen.Cart,
+)
 
 @Composable
-fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
-    Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = {
-            navController.navigate("/cart")
-        }) {
-            Icon(Icons.Rounded.ShoppingCart, contentDescription = "Shopping cart")
+fun HomeScreen(navController: NavHostController) {
+
+    Scaffold(bottomBar = {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
+        val shouldShowBottomNavigation = when (currentDestination?.route) {
+            Screen.Feed.route, Screen.Cart.route -> true
+            else -> false
         }
-    }) { paddingValues ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(18.dp),
-            modifier = Modifier.padding(paddingValues)
-        ) {
-            items(items.size) { idx ->
-                val product = items[idx]
-                ProductItem(product = product, onClick = {
-                    navController.navigate("/product/${product.id}")
-                }, onProductAdd = {
-                    viewModel.addToCart(product)
-                })
+        if (shouldShowBottomNavigation) NavigationBar {
+            items.forEach { screen ->
+                NavigationBarItem(
+                    icon = { Icon(screen.icon, contentDescription = null) },
+                    label = { Text(stringResource(screen.resourceId)) },
+                    selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                    onClick = {
+                        navController.navigate(screen.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                )
             }
+        }
+    }) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "/",
+            Modifier.padding(innerPadding)
+        ) {
+            createNavGraph(navigateToRoute = { route ->
+                navController.navigate(route)
+            })
         }
     }
 }
 
-@Composable
-fun ProductItem(product: Product, onClick: () -> Unit, onProductAdd: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-    ) {
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)) {
-            Text(text = product.name)
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "MK ${product.price}")
-                FilledIconButton(onClick = onProductAdd) {
-                    Icon(Icons.Filled.Add, contentDescription = "Add Icon")
-                }
-            }
-        }
-
+fun NavGraphBuilder.createNavGraph(
+    navigateToRoute: (route: String) -> Unit,
+) {
+    composable("/") {
+        FeedScreen(
+            navigate = navigateToRoute
+        )
+    }
+    composable(
+        "/product/{id}",
+        arguments = listOf(navArgument("id") { type = NavType.StringType })
+    ) { backStackEntry ->
+        val productId = backStackEntry.arguments?.getString("id") ?: ""
+        ProductScreen(productId)
+    }
+    composable("/cart") {
+        CartScreen()
     }
 }
