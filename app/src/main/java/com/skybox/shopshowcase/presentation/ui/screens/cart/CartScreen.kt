@@ -43,7 +43,7 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
 
     Scaffold(topBar = {
         MediumTopAppBar(title = { Text(text = "Cart") }, actions = {
-            if (isCartEmpty) {
+            if (isCartEmpty.not()) {
                 IconButton(onClick = viewModel::clearCart) {
                     Icon(Icons.Filled.DeleteForever, contentDescription = "")
                 }
