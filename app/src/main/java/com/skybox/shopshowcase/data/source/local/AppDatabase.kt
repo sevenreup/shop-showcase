@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -13,12 +14,14 @@ import com.skybox.shopshowcase.data.entities.CartItemEntity
 import com.skybox.shopshowcase.data.entities.CategoryEntity
 import com.skybox.shopshowcase.data.entities.ProductCategoryCrossRef
 import com.skybox.shopshowcase.data.entities.ProductEntity
+import com.skybox.shopshowcase.data.source.local.converters.ListConverter
 import com.skybox.shopshowcase.workers.DatabaseSeederWorker
 
 @Database(
     entities = [ProductEntity::class, CategoryEntity::class, ProductCategoryCrossRef::class, CartEntity::class, CartItemEntity::class],
     version = 1
 )
+@TypeConverters(ListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun cartDao(): CartDao

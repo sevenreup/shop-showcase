@@ -2,9 +2,9 @@ package com.skybox.shopshowcase.presentation.ui.screens.feed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.skybox.shopshowcase.data.entities.ProductEntity
 import com.skybox.shopshowcase.data.repository.CartRepository
 import com.skybox.shopshowcase.data.repository.ProductRepository
+import com.skybox.shopshowcase.domain.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -30,7 +30,7 @@ class FeedScreenViewModel @Inject constructor(
 
     }
 
-    fun addToCart(product: ProductEntity) {
+    fun addToCart(product: Product) {
         viewModelScope.launch {
             cartRepository.addToCart(product.productId, 1)
         }
@@ -38,7 +38,7 @@ class FeedScreenViewModel @Inject constructor(
 }
 
 data class HomeUIState(
-    val products: List<ProductEntity>,
+    val products: List<Product>,
     val loading: Boolean = false,
     val error: String? = null
 )
