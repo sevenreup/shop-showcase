@@ -9,17 +9,19 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.skybox.shopshowcase.data.entities.CartEntity
+import com.skybox.shopshowcase.data.entities.CartItemEntity
 import com.skybox.shopshowcase.data.entities.CategoryEntity
 import com.skybox.shopshowcase.data.entities.ProductCategoryCrossRef
 import com.skybox.shopshowcase.data.entities.ProductEntity
 import com.skybox.shopshowcase.workers.DatabaseSeederWorker
 
 @Database(
-    entities = [ProductEntity::class, CategoryEntity::class, ProductCategoryCrossRef::class, CartEntity::class],
+    entities = [ProductEntity::class, CategoryEntity::class, ProductCategoryCrossRef::class, CartEntity::class, CartItemEntity::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
+    abstract fun cartDao(): CartDao
 
     companion object {
         private const val DATABASE_NAME = "shop-showcase"
