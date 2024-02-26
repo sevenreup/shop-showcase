@@ -18,11 +18,17 @@ interface CartDao {
     @Delete
     suspend fun deleteCartItem(cartItem: CartItemEntity)
 
+    @Query("SELECT * FROM cart_item WHERE productId = :productId")
+    suspend fun getCartItem(productId: Int): CartItemEntity?
+
     @Transaction
     @Query("SELECT * FROM cart_item WHERE productId = :productId")
-    suspend fun getCartItem(productId: Int): CartItemWithProduct?
+    suspend fun getCartItemWithProduct(productId: Int): CartItemWithProduct?
 
     @Transaction
     @Query("SELECT * FROM cart_item")
     fun getAllCartItemsWithProduct(): Flow<List<CartItemWithProduct>>
+
+    @Query("DELETE FROM cart_item")
+    suspend fun deleteAllCartItems()
 }

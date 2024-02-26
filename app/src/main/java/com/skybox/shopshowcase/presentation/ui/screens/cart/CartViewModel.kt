@@ -2,9 +2,9 @@ package com.skybox.shopshowcase.presentation.ui.screens.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.skybox.shopshowcase.data.entities.CartItemWithProduct
 import com.skybox.shopshowcase.data.repository.CartRepository
 import com.skybox.shopshowcase.domain.Cart
+import com.skybox.shopshowcase.domain.CartItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -21,19 +21,34 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
         cartState
     }
 
-    private fun calculateTotal(cartItems: List<CartItemWithProduct>): Double {
-        return cartItems.sumOf { it.cartItem.quantity * it.product.price }
+    private fun calculateTotal(cartItems: List<CartItem>): Double {
+        return cartItems.sumOf { it.quantity * it.price }
     }
 
-    fun addToCart(productId: Int, quantity: Int) {
+    fun incrementCartItem(cartItem: CartItem) {
         viewModelScope.launch {
-            cartRepository.addToCart(productId, quantity)
+            cartRepository.updateItem(cartItem.productId, cartItem.quantity + 1)
+        }
+    }
+
+    fun decrementCartItem(cartItem: CartItem) {
+        viewModelScope.launch {
+            val quantity = cartItem.quantity - 1
+            if (quantity > 0) {
+                cartRepository.updateItem(cartItem.productId, quantity)
+            }
         }
     }
 
     fun removeFromCart(productId: Int) {
         viewModelScope.launch {
             cartRepository.removeFromCart(productId)
+        }
+    }
+
+    fun clearCart() {
+        viewModelScope.launch {
+            cartRepository.clearCartItems()
         }
     }
 }

@@ -11,7 +11,7 @@ import javax.inject.Inject
 class CartRepository @Inject constructor(private val cartDao: CartDao) {
 
     suspend fun addToCart(productId: Int, quantity: Int) {
-        val existingCartItem = cartDao.getCartItem(productId)
+        val existingCartItem = cartDao.getCartItemWithProduct(productId)
 
         if (existingCartItem != null) {
             val updatedQuantity = existingCartItem.cartItem.quantity + quantity
@@ -22,8 +22,16 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         }
     }
 
-    suspend fun removeFromCart(productId: Int) {
+    suspend fun updateItem(productId: Int, quantity: Int) {
         val existingCartItem = cartDao.getCartItem(productId)
+
+        if (existingCartItem != null) {
+            cartDao.insertCartItem(existingCartItem.copy(quantity = quantity))
+        }
+    }
+
+    suspend fun removeFromCart(productId: Int) {
+        val existingCartItem = cartDao.getCartItemWithProduct(productId)
 
         if (existingCartItem != null) {
             cartDao.deleteCartItem(existingCartItem.cartItem)
@@ -36,8 +44,13 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
                 productId = item.product.productId,
                 cartItemId = item.cartItem.cartItemId,
                 productName = item.product.name,
-                quantity = item.cartItem.quantity
+                quantity = item.cartItem.quantity,
+                price = item.product.price
             )
         }
+    }
+
+   suspend fun clearCartItems() {
+        cartDao.deleteAllCartItems()
     }
 }

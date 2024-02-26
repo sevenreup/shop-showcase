@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skybox.shopshowcase.data.entities.ProductEntity
+import com.skybox.shopshowcase.util.formatCurrency
 import com.skybox.shopshowcase.util.toProductRoute
 
 @Composable
@@ -82,7 +83,7 @@ fun ProductItem(product: ProductEntity, onClick: () -> Unit, onProductAdd: () ->
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "MK ${product.price}")
+                Text(text = product.price.formatCurrency())
                 FilledIconButton(onClick = onProductAdd) {
                     Icon(Icons.Filled.Add, contentDescription = "Add Icon")
                 }
