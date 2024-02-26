@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person3
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -29,15 +30,18 @@ import com.skybox.shopshowcase.R
 import com.skybox.shopshowcase.presentation.ui.screens.cart.CartScreen
 import com.skybox.shopshowcase.presentation.ui.screens.feed.FeedScreen
 import com.skybox.shopshowcase.presentation.ui.screens.product.ProductScreen
+import com.skybox.shopshowcase.presentation.ui.screens.profile.ProfileScreen
 
 sealed class Screen(val route: String, val icon: ImageVector, @StringRes val resourceId: Int) {
     data object Feed : Screen("/", Icons.Filled.Home, R.string.home)
     data object Cart : Screen("/cart", Icons.Filled.ShoppingCart, R.string.cart)
+    data object Profile : Screen("/profile", Icons.Filled.Person3, R.string.profile)
 }
 
 val items = listOf(
     Screen.Feed,
     Screen.Cart,
+    Screen.Profile
 )
 
 @Composable
@@ -47,7 +51,7 @@ fun HomeScreen(navController: NavHostController) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         val shouldShowBottomNavigation = when (currentDestination?.route) {
-            Screen.Feed.route, Screen.Cart.route -> true
+            Screen.Feed.route, Screen.Cart.route, Screen.Profile.route -> true
             else -> false
         }
         if (shouldShowBottomNavigation) NavigationBar {
@@ -95,6 +99,9 @@ fun NavGraphBuilder.createNavGraph(
     ) { backStackEntry ->
         val productId = backStackEntry.arguments?.getString("id") ?: ""
         ProductScreen(productId)
+    }
+    composable("/profile") {
+        ProfileScreen()
     }
     composable("/cart") {
         CartScreen()
