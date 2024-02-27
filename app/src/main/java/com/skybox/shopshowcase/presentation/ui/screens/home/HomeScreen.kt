@@ -29,6 +29,7 @@ import androidx.navigation.navArgument
 import com.skybox.shopshowcase.R
 import com.skybox.shopshowcase.presentation.ui.screens.cart.CartScreen
 import com.skybox.shopshowcase.presentation.ui.screens.feed.FeedScreen
+import com.skybox.shopshowcase.presentation.ui.screens.orders.OrdersScreen
 import com.skybox.shopshowcase.presentation.ui.screens.product.ProductScreen
 import com.skybox.shopshowcase.presentation.ui.screens.profile.ProfileScreen
 
@@ -106,5 +107,8 @@ fun NavGraphBuilder.createNavGraph(
     }
     composable("/cart") {
         CartScreen()
+    }
+    composable("/orders") {
+        OrdersScreen(navigateBack = navigateBack)
     }
 }

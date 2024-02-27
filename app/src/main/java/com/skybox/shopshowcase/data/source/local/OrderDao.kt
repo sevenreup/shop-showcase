@@ -8,6 +8,7 @@ import com.skybox.shopshowcase.data.entities.OrderEntity
 import com.skybox.shopshowcase.data.entities.OrderItemEntity
 import com.skybox.shopshowcase.data.entities.OrderWithItems
 import com.skybox.shopshowcase.domain.CartItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderDao {
@@ -37,5 +38,5 @@ interface OrderDao {
 
     @Transaction
     @Query("SELECT * FROM orders")
-    suspend fun getAllOrdersWithItems(): List<OrderWithItems>
+    fun getAllOrdersWithItems(): Flow<List<OrderWithItems>>
 }
