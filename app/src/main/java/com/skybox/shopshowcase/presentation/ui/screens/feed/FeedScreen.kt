@@ -27,14 +27,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.rememberGlidePreloadingData
-import com.bumptech.glide.signature.ObjectKey
 import com.skybox.shopshowcase.domain.Product
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.util.formatCurrency

@@ -7,27 +7,37 @@ import androidx.compose.ui.layout.ContentScale
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.Placeholder
+import com.bumptech.glide.integration.compose.RequestBuilderTransform
+import com.bumptech.glide.integration.compose.placeholder
 import com.bumptech.glide.signature.ObjectKey
+import com.skybox.shopshowcase.R
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProductImage(
     url: String,
-    signature: ObjectKey,
-    preloadRequest: RequestBuilder<Drawable>,
-    modifier: Modifier = Modifier,
-    contentDescription: String = ""
+    modifier: Modifier = Modifier, signature: ObjectKey = ObjectKey(url),
+    preloadRequest: RequestBuilder<Drawable>? = null,
+    contentDescription: String = "",
+    requestBuilderTransform: RequestBuilderTransform<Drawable> = { it },
 ) {
+
     GlideImage(
         model = url,
         contentDescription = contentDescription,
         contentScale = ContentScale.FillBounds,
-        modifier = modifier
+        loading = placeholder(R.drawable.loading_drawable),
+        modifier = modifier,
     ) {
-        it
-            .thumbnail(
-                preloadRequest
-            )
-            .signature(signature)
+        var request = it
+
+        if (preloadRequest != null) {
+            request = request
+                .thumbnail(
+                    preloadRequest
+                )
+        }
+        requestBuilderTransform(request.signature(signature))
     }
 }

@@ -43,6 +43,7 @@ import com.skybox.shopshowcase.domain.Cart
 import com.skybox.shopshowcase.domain.CartItem
 import com.skybox.shopshowcase.presentation.ui.components.EmptyState
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
+import com.skybox.shopshowcase.presentation.ui.components.QuantityRow
 import com.skybox.shopshowcase.util.formatCurrency
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -166,18 +167,7 @@ fun CartItemCard(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = item.price.formatCurrency())
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    OutlinedIconButton(onClick = increment) {
-                        Icon(Icons.Filled.Add, contentDescription = "")
-                    }
-                    Text(text = item.quantity.toString())
-                    OutlinedIconButton(onClick = decrement, enabled = item.quantity > 1) {
-                        Icon(Icons.Filled.Remove, contentDescription = "")
-                    }
-                }
+                QuantityRow(quantity = item.quantity, onIncrement = increment, onDecrement = decrement)
             }
         }
     }

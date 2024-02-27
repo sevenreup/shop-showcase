@@ -80,13 +80,14 @@ fun HomeScreen(navController: NavHostController) {
         ) {
             createNavGraph(navigateToRoute = { route ->
                 navController.navigate(route)
-            })
+            }, navigateBack = { navController.popBackStack() })
         }
     }
 }
 
 fun NavGraphBuilder.createNavGraph(
     navigateToRoute: (route: String) -> Unit,
+    navigateBack: () -> Unit
 ) {
     composable("/") {
         FeedScreen(
@@ -98,7 +99,7 @@ fun NavGraphBuilder.createNavGraph(
         arguments = listOf(navArgument("id") { type = NavType.StringType })
     ) { backStackEntry ->
         val productId = backStackEntry.arguments?.getString("id") ?: ""
-        ProductScreen(productId)
+        ProductScreen(productId, navigateBack = navigateBack)
     }
     composable("/profile") {
         ProfileScreen(navigate = navigateToRoute)

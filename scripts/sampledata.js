@@ -8,19 +8,21 @@ fs.readFile("sample.json", "utf8", (err, data) => {
 
   const jsonData = JSON.parse(data);
   const products = [];
-  let categoryId = 0;
-  const categoryMap = new Map();
+  let categoryId = 1;
+  const categoryMap = {};
   const productCategoryCrossRefs = [];
 
   jsonData.products.forEach((product) => {
-    if (!categoryMap.has(product.category)) {
-      const catId = categoryId++;
-      categoryMap[product.category] = {
-        categoryId: catId,
+    let category = categoryMap[product.category];
+
+    if (category == undefined || category == null) {
+      category = {
+        categoryId: categoryId,
         categoryName: product.category,
       };
+      categoryMap[product.category] = category;
+      categoryId = categoryId + 1;
     }
-    const category = categoryMap[product.category];
     productCategoryCrossRefs.push({
       productId: product.id,
       categoryId: category.categoryId,
@@ -31,6 +33,8 @@ fs.readFile("sample.json", "utf8", (err, data) => {
       description: product.description,
       images: product.images,
       price: product.price,
+      rating: product.rating,
+      brand: product.brand,
       thumbnail: product.thumbnail,
       categories: [category.categoryId],
     });

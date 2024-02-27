@@ -12,9 +12,11 @@
         "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
       ],
       "price": 549,
+      "rating": 4.69,
+      "brand": "Apple",
       "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
       "categories": [
-        0
+        1
       ]
     },
     {
@@ -28,6 +30,8 @@
         "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
       ],
       "price": 899,
+      "rating": 4.44,
+      "brand": "Apple",
       "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
       "categories": [
         1
@@ -41,9 +45,11 @@
         "https://cdn.dummyjson.com/product-images/3/1.jpg"
       ],
       "price": 1249,
+      "rating": 4.09,
+      "brand": "Samsung",
       "thumbnail": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
       "categories": [
-        2
+        1
       ]
     },
     {
@@ -58,9 +64,11 @@
         "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
       ],
       "price": 280,
+      "rating": 4.3,
+      "brand": "OPPO",
       "thumbnail": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
       "categories": [
-        3
+        1
       ]
     },
     {
@@ -73,9 +81,11 @@
         "https://cdn.dummyjson.com/product-images/5/3.jpg"
       ],
       "price": 499,
+      "rating": 4.09,
+      "brand": "Huawei",
       "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
       "categories": [
-        4
+        1
       ]
     },
     {
@@ -89,9 +99,11 @@
         "https://cdn.dummyjson.com/product-images/6/4.jpg"
       ],
       "price": 1749,
+      "rating": 4.57,
+      "brand": "Apple",
       "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
       "categories": [
-        5
+        2
       ]
     },
     {
@@ -105,9 +117,11 @@
         "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
       ],
       "price": 1499,
+      "rating": 4.25,
+      "brand": "Samsung",
       "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
       "categories": [
-        6
+        2
       ]
     },
     {
@@ -122,9 +136,11 @@
         "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg"
       ],
       "price": 1499,
+      "rating": 4.43,
+      "brand": "Microsoft Surface",
       "thumbnail": "https://cdn.dummyjson.com/product-images/8/thumbnail.jpg",
       "categories": [
-        7
+        2
       ]
     },
     {
@@ -139,9 +155,11 @@
         "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg"
       ],
       "price": 1099,
+      "rating": 4.54,
+      "brand": "Infinix",
       "thumbnail": "https://cdn.dummyjson.com/product-images/9/thumbnail.jpg",
       "categories": [
-        8
+        2
       ]
     },
     {
@@ -155,9 +173,11 @@
         "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg"
       ],
       "price": 1099,
+      "rating": 4.43,
+      "brand": "HP Pavilion",
       "thumbnail": "https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg",
       "categories": [
-        9
+        2
       ]
     },
     {
@@ -171,9 +191,11 @@
         "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg"
       ],
       "price": 13,
+      "rating": 4.26,
+      "brand": "Impression of Acqua Di Gio",
       "thumbnail": "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg",
       "categories": [
-        10
+        3
       ]
     },
     {
@@ -188,9 +210,11 @@
         "https://cdn.dummyjson.com/product-images/12/thumbnail.jpg"
       ],
       "price": 40,
+      "rating": 4,
+      "brand": "Royal_Mirage",
       "thumbnail": "https://cdn.dummyjson.com/product-images/12/thumbnail.jpg",
       "categories": [
-        11
+        3
       ]
     },
     {
@@ -205,9 +229,11 @@
         "https://cdn.dummyjson.com/product-images/13/thumbnail.webp"
       ],
       "price": 13,
+      "rating": 4.59,
+      "brand": "Fog Scent Xpressio",
       "thumbnail": "https://cdn.dummyjson.com/product-images/13/thumbnail.webp",
       "categories": [
-        12
+        3
       ]
     },
     {
@@ -221,9 +247,11 @@
         "https://cdn.dummyjson.com/product-images/14/thumbnail.jpg"
       ],
       "price": 120,
+      "rating": 4.21,
+      "brand": "Al Munakh",
       "thumbnail": "https://cdn.dummyjson.com/product-images/14/thumbnail.jpg",
       "categories": [
-        13
+        3
       ]
     },
     {
@@ -238,9 +266,11 @@
         "https://cdn.dummyjson.com/product-images/15/thumbnail.jpg"
       ],
       "price": 30,
+      "rating": 4.7,
+      "brand": "Lord - Al-Rehab",
       "thumbnail": "https://cdn.dummyjson.com/product-images/15/thumbnail.jpg",
       "categories": [
-        14
+        3
       ]
     },
     {
@@ -255,9 +285,11 @@
         "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg"
       ],
       "price": 19,
+      "rating": 4.83,
+      "brand": "L'Oreal Paris",
       "thumbnail": "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg",
       "categories": [
-        15
+        4
       ]
     },
     {
@@ -271,9 +303,11 @@
         "https://cdn.dummyjson.com/product-images/17/thumbnail.jpg"
       ],
       "price": 12,
+      "rating": 4.52,
+      "brand": "Hemani Tea",
       "thumbnail": "https://cdn.dummyjson.com/product-images/17/thumbnail.jpg",
       "categories": [
-        16
+        4
       ]
     },
     {
@@ -288,9 +322,11 @@
         "https://cdn.dummyjson.com/product-images/18/thumbnail.jpg"
       ],
       "price": 40,
+      "rating": 4.56,
+      "brand": "Dermive",
       "thumbnail": "https://cdn.dummyjson.com/product-images/18/thumbnail.jpg",
       "categories": [
-        17
+        4
       ]
     },
     {
@@ -304,9 +340,11 @@
         "https://cdn.dummyjson.com/product-images/19/thumbnail.jpg"
       ],
       "price": 46,
+      "rating": 4.42,
+      "brand": "ROREC White Rice",
       "thumbnail": "https://cdn.dummyjson.com/product-images/19/thumbnail.jpg",
       "categories": [
-        18
+        4
       ]
     },
     {
@@ -321,9 +359,11 @@
         "https://cdn.dummyjson.com/product-images/20/thumbnail.jpg"
       ],
       "price": 70,
+      "rating": 4.06,
+      "brand": "Fair & Clear",
       "thumbnail": "https://cdn.dummyjson.com/product-images/20/thumbnail.jpg",
       "categories": [
-        19
+        4
       ]
     },
     {
@@ -336,9 +376,11 @@
         "https://cdn.dummyjson.com/product-images/21/3.jpg"
       ],
       "price": 20,
+      "rating": 4.44,
+      "brand": "Saaf & Khaas",
       "thumbnail": "https://cdn.dummyjson.com/product-images/21/thumbnail.png",
       "categories": [
-        20
+        5
       ]
     },
     {
@@ -351,9 +393,11 @@
         "https://cdn.dummyjson.com/product-images/22/3.jpg"
       ],
       "price": 14,
+      "rating": 4.57,
+      "brand": "Bake Parlor Big",
       "thumbnail": "https://cdn.dummyjson.com/product-images/22/thumbnail.jpg",
       "categories": [
-        21
+        5
       ]
     },
     {
@@ -368,9 +412,11 @@
         "https://cdn.dummyjson.com/product-images/23/thumbnail.jpg"
       ],
       "price": 14,
+      "rating": 4.85,
+      "brand": "Baking Food Items",
       "thumbnail": "https://cdn.dummyjson.com/product-images/23/thumbnail.jpg",
       "categories": [
-        22
+        5
       ]
     },
     {
@@ -385,9 +431,11 @@
         "https://cdn.dummyjson.com/product-images/24/thumbnail.jpg"
       ],
       "price": 46,
+      "rating": 4.94,
+      "brand": "fauji",
       "thumbnail": "https://cdn.dummyjson.com/product-images/24/thumbnail.jpg",
       "categories": [
-        23
+        5
       ]
     },
     {
@@ -402,9 +450,11 @@
         "https://cdn.dummyjson.com/product-images/25/thumbnail.jpg"
       ],
       "price": 70,
+      "rating": 4.87,
+      "brand": "Dry Rose",
       "thumbnail": "https://cdn.dummyjson.com/product-images/25/thumbnail.jpg",
       "categories": [
-        24
+        5
       ]
     },
     {
@@ -420,9 +470,11 @@
         "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg"
       ],
       "price": 41,
+      "rating": 4.08,
+      "brand": "Boho Decor",
       "thumbnail": "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg",
       "categories": [
-        25
+        6
       ]
     },
     {
@@ -437,9 +489,11 @@
         "https://cdn.dummyjson.com/product-images/27/thumbnail.webp"
       ],
       "price": 51,
+      "rating": 4.41,
+      "brand": "Flying Wooden",
       "thumbnail": "https://cdn.dummyjson.com/product-images/27/thumbnail.webp",
       "categories": [
-        26
+        6
       ]
     },
     {
@@ -454,9 +508,11 @@
         "https://cdn.dummyjson.com/product-images/28/thumbnail.jpg"
       ],
       "price": 20,
+      "rating": 4.82,
+      "brand": "LED Lights",
       "thumbnail": "https://cdn.dummyjson.com/product-images/28/thumbnail.jpg",
       "categories": [
-        27
+        6
       ]
     },
     {
@@ -471,9 +527,11 @@
         "https://cdn.dummyjson.com/product-images/29/thumbnail.webp"
       ],
       "price": 60,
+      "rating": 4.44,
+      "brand": "luxury palace",
       "thumbnail": "https://cdn.dummyjson.com/product-images/29/thumbnail.webp",
       "categories": [
-        28
+        6
       ]
     },
     {
@@ -487,42 +545,44 @@
         "https://cdn.dummyjson.com/product-images/30/thumbnail.jpg"
       ],
       "price": 30,
+      "rating": 4.92,
+      "brand": "Golden",
       "thumbnail": "https://cdn.dummyjson.com/product-images/30/thumbnail.jpg",
       "categories": [
-        29
+        6
       ]
     }
   ],
   "categories": [
     {
-      "categoryId": 4,
+      "categoryId": 1,
       "categoryName": "smartphones"
     },
     {
-      "categoryId": 9,
+      "categoryId": 2,
       "categoryName": "laptops"
     },
     {
-      "categoryId": 14,
+      "categoryId": 3,
       "categoryName": "fragrances"
     },
     {
-      "categoryId": 19,
+      "categoryId": 4,
       "categoryName": "skincare"
     },
     {
-      "categoryId": 24,
+      "categoryId": 5,
       "categoryName": "groceries"
     },
     {
-      "categoryId": 29,
+      "categoryId": 6,
       "categoryName": "home-decoration"
     }
   ],
   "productCategoryCrossRefs": [
     {
       "productId": 1,
-      "categoryId": 0
+      "categoryId": 1
     },
     {
       "productId": 2,
@@ -530,115 +590,115 @@
     },
     {
       "productId": 3,
-      "categoryId": 2
+      "categoryId": 1
     },
     {
       "productId": 4,
-      "categoryId": 3
+      "categoryId": 1
     },
     {
       "productId": 5,
-      "categoryId": 4
+      "categoryId": 1
     },
     {
       "productId": 6,
-      "categoryId": 5
+      "categoryId": 2
     },
     {
       "productId": 7,
-      "categoryId": 6
+      "categoryId": 2
     },
     {
       "productId": 8,
-      "categoryId": 7
+      "categoryId": 2
     },
     {
       "productId": 9,
-      "categoryId": 8
+      "categoryId": 2
     },
     {
       "productId": 10,
-      "categoryId": 9
+      "categoryId": 2
     },
     {
       "productId": 11,
-      "categoryId": 10
+      "categoryId": 3
     },
     {
       "productId": 12,
-      "categoryId": 11
+      "categoryId": 3
     },
     {
       "productId": 13,
-      "categoryId": 12
+      "categoryId": 3
     },
     {
       "productId": 14,
-      "categoryId": 13
+      "categoryId": 3
     },
     {
       "productId": 15,
-      "categoryId": 14
+      "categoryId": 3
     },
     {
       "productId": 16,
-      "categoryId": 15
+      "categoryId": 4
     },
     {
       "productId": 17,
-      "categoryId": 16
+      "categoryId": 4
     },
     {
       "productId": 18,
-      "categoryId": 17
+      "categoryId": 4
     },
     {
       "productId": 19,
-      "categoryId": 18
+      "categoryId": 4
     },
     {
       "productId": 20,
-      "categoryId": 19
+      "categoryId": 4
     },
     {
       "productId": 21,
-      "categoryId": 20
+      "categoryId": 5
     },
     {
       "productId": 22,
-      "categoryId": 21
+      "categoryId": 5
     },
     {
       "productId": 23,
-      "categoryId": 22
+      "categoryId": 5
     },
     {
       "productId": 24,
-      "categoryId": 23
+      "categoryId": 5
     },
     {
       "productId": 25,
-      "categoryId": 24
+      "categoryId": 5
     },
     {
       "productId": 26,
-      "categoryId": 25
+      "categoryId": 6
     },
     {
       "productId": 27,
-      "categoryId": 26
+      "categoryId": 6
     },
     {
       "productId": 28,
-      "categoryId": 27
+      "categoryId": 6
     },
     {
       "productId": 29,
-      "categoryId": 28
+      "categoryId": 6
     },
     {
       "productId": 30,
-      "categoryId": 29
+      "categoryId": 6
     }
   ]
 }
