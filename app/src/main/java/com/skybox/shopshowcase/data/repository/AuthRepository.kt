@@ -18,7 +18,8 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth)
         return User(
             id = currentUser.uid,
             email = currentUser.email,
-            username = currentUser.displayName ?: ""
+            username = currentUser.displayName ?: "",
+            profileImage = currentUser.photoUrl?.toString()
         )
     }
 

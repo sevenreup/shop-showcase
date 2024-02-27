@@ -101,7 +101,7 @@ fun NavGraphBuilder.createNavGraph(
         ProductScreen(productId)
     }
     composable("/profile") {
-        ProfileScreen()
+        ProfileScreen(navigate = navigateToRoute)
     }
     composable("/cart") {
         CartScreen()
