@@ -46,7 +46,8 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
                 productName = item.product.name,
                 image = item.product.thumbnail,
                 quantity = item.cartItem.quantity,
-                price = item.product.price
+                price = item.product.price,
+                brand = item.product.brand,
             )
         }
     }

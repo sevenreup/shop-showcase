@@ -3,7 +3,6 @@ package com.skybox.shopshowcase.presentation.ui.screens.home
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person3
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -11,9 +10,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -27,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
 import com.skybox.shopshowcase.R
+import com.skybox.shopshowcase.presentation.ui.components.DefaultSnackbar
 import com.skybox.shopshowcase.presentation.ui.screens.cart.CartScreen
 import com.skybox.shopshowcase.presentation.ui.screens.feed.FeedScreen
 import com.skybox.shopshowcase.presentation.ui.screens.orders.OrdersScreen
@@ -47,6 +49,7 @@ val items = listOf(
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
+    val snackHostState = remember { SnackbarHostState() }
 
     Scaffold(bottomBar = {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -73,13 +76,20 @@ fun HomeScreen(navController: NavHostController) {
                 )
             }
         }
+    }, snackbarHost = {
+        DefaultSnackbar(
+            snackBarHostState = snackHostState,
+            onDismiss = {
+                snackHostState.currentSnackbarData?.dismiss()
+            }
+        )
     }) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = "/",
             Modifier.padding(innerPadding)
         ) {
-            createNavGraph(navigateToRoute = { route ->
+            createNavGraph(snackBarHostState = snackHostState, navigateToRoute = { route ->
                 navController.navigate(route)
             }, navigateBack = { navController.popBackStack() })
         }
@@ -87,7 +97,7 @@ fun HomeScreen(navController: NavHostController) {
 }
 
 fun NavGraphBuilder.createNavGraph(
-    navigateToRoute: (route: String) -> Unit,
+    snackBarHostState: SnackbarHostState, navigateToRoute: (route: String) -> Unit,
     navigateBack: () -> Unit
 ) {
     composable("/") {

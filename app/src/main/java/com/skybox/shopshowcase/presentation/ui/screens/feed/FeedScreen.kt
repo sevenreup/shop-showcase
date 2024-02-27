@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -33,6 +32,8 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.compose.rememberGlidePreloadingData
 import com.skybox.shopshowcase.domain.Product
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
+import com.skybox.shopshowcase.presentation.ui.components.ShimmerGrid
+import com.skybox.shopshowcase.presentation.ui.components.ShimmerList
 import com.skybox.shopshowcase.util.formatCurrency
 import com.skybox.shopshowcase.util.toProductRoute
 
@@ -44,14 +45,9 @@ fun FeedScreen(
     val uiState by viewModel.state.collectAsState()
 
     Scaffold { paddingValues ->
+
         if (uiState.loading) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(paddingValues)
-            ) {
-                CircularProgressIndicator()
-            }
+            ShimmerGrid()
         } else {
             val glidePreloadingData =
                 rememberGlidePreloadingData(
@@ -109,7 +105,8 @@ fun ProductItem(
                 preloadRequest = preloadRequest,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp).clip(RoundedCornerShape(6.dp))
+                    .height(120.dp)
+                    .clip(RoundedCornerShape(6.dp))
             )
             Text(text = product.name)
             Row(
