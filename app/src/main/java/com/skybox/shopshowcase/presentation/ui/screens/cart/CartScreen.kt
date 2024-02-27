@@ -77,7 +77,7 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                         Text(text = "Total")
                         Text(text = state.total.formatCurrency())
                     }
-                    OutlinedButton(onClick = { /*TODO*/ }) {
+                    OutlinedButton(onClick = { viewModel.placeOrder(state) }) {
                         Text(text = "Checkout")
                         Icon(Icons.Filled.ChevronRight, contentDescription = "")
                     }

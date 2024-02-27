@@ -23,4 +23,7 @@ class DatabaseModule {
 
     @Provides
     fun providesCartDAO(database: AppDatabase) = database.cartDao()
+
+    @Provides
+    fun providesOrderDao(database: AppDatabase) = database.orderDao()
 }

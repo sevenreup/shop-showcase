@@ -3,6 +3,7 @@ package com.skybox.shopshowcase.presentation.ui.screens.cart
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skybox.shopshowcase.data.repository.CartRepository
+import com.skybox.shopshowcase.data.repository.OrderRepository
 import com.skybox.shopshowcase.domain.Cart
 import com.skybox.shopshowcase.domain.CartItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +13,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CartViewModel @Inject constructor(private val cartRepository: CartRepository) : ViewModel() {
+class CartViewModel @Inject constructor(
+    private val cartRepository: CartRepository,
+    private val orderRepository: OrderRepository
+) : ViewModel() {
 
     val cartState: Flow<Cart> = cartRepository.getCartItems().map { cartItemsWithProduct ->
         val total = calculateTotal(cartItemsWithProduct)
@@ -23,6 +27,12 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
     private fun calculateTotal(cartItems: List<CartItem>): Double {
         return cartItems.sumOf { it.quantity * it.price }
+    }
+
+    fun placeOrder(cart: Cart) {
+        viewModelScope.launch {
+            orderRepository.placeOrder(cart.cartItems, cart.total)
+        }
     }
 
     fun incrementCartItem(cartItem: CartItem) {

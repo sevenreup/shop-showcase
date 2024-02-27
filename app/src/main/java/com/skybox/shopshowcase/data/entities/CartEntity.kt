@@ -1,7 +1,0 @@
-package com.skybox.shopshowcase.data.entities
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "cart")
-data class CartEntity(@PrimaryKey val uid: Int,)
