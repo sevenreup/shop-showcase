@@ -25,6 +25,12 @@ interface ProductDao {
     @Query("SELECT * FROM product")
     suspend fun getAllProductsWithCategories(): List<ProductWithCategories>
 
+    @Query("SELECT * FROM product WHERE brand IN (:brand) LIMIT 5")
+    suspend fun getByBrand(brand: List<String>): List<ProductWithCategories>
+
+    @Query("SELECT * FROM product WHERE price BETWEEN :minPrice AND :maxPrice LIMIT 5")
+    suspend fun getRecommendedProductsByPriceRange(minPrice: Double, maxPrice: Double): List<ProductWithCategories>
+
     @Insert
     fun insertAll(vararg products: ProductEntity)
 
