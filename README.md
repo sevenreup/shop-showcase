@@ -56,10 +56,11 @@ The app uses Room Database to handle product data storage. The data is prepopula
 
 ## Features
 
+- **Google sign** Users can login using google
 - **Add Items to Cart**: Users can add items to their shopping cart.
 - **Update Cart**: Users can update the quantity of items in the cart.
 - **Checkout**: Users can proceed to checkout and complete their purchase.
-- **Google sign** Users can login using google
+- **Orders** Users can view their past orders
 
 
 ## Design Decisions for the Shopping Basket Feature
