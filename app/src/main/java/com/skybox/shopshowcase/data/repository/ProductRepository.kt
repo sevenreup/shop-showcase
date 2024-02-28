@@ -5,13 +5,19 @@ import com.skybox.shopshowcase.data.source.local.mappers.ProductEntityMapper.toM
 import com.skybox.shopshowcase.domain.model.Product
 import javax.inject.Inject
 
-class ProductRepository @Inject constructor(private val productDao: ProductDao) {
-    suspend fun getProduct(productId: Int) = productDao.getProduct(productId)?.toModel()
-    suspend fun getProducts() = productDao.getAllProductsWithCategories().map {
-        it.toModel()
+class ProductRepository @Inject constructor(private val productDao: ProductDao) :
+    IProductRepository {
+    override suspend fun getProduct(productId: Int): Product? {
+        return productDao.getProduct(productId)?.toModel()
     }
 
-    suspend fun getRecommendedProducts(
+    override suspend fun getProducts(): List<Product> {
+        return productDao.getAllProductsWithCategories().map {
+            it.toModel()
+        }
+    }
+
+    override suspend fun getRecommendedProducts(
         brands: List<String>,
         priceLower: Double,
         priceUpper: Double

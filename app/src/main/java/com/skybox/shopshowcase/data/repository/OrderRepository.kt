@@ -4,13 +4,15 @@ import com.skybox.shopshowcase.data.entities.OrderEntity
 import com.skybox.shopshowcase.data.source.local.OrderDao
 import com.skybox.shopshowcase.data.source.local.mappers.OrderEntityMapper.toModel
 import com.skybox.shopshowcase.domain.model.CartItem
+import com.skybox.shopshowcase.domain.model.Order
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.Calendar
 import javax.inject.Inject
 
-class OrderRepository @Inject constructor(private val orderDao: OrderDao) {
+class OrderRepository @Inject constructor(private val orderDao: OrderDao) : IOrderRepository {
 
-    suspend fun placeOrder(orderItems: List<CartItem>, totalAmount: Double) {
+    override suspend fun placeOrder(orderItems: List<CartItem>, totalAmount: Double) {
         val order = OrderEntity(
             orderDate = Calendar.getInstance().time,
             totalAmount = totalAmount
@@ -18,9 +20,11 @@ class OrderRepository @Inject constructor(private val orderDao: OrderDao) {
         orderDao.createOrder(order, orderItems)
     }
 
-    fun getAllOrdersWithItems() = orderDao.getAllOrdersWithItems().map { list ->
-        list.map {
-            it.toModel()
+    override fun getAllOrdersWithItems(): Flow<List<Order>> {
+        return orderDao.getAllOrdersWithItems().map { list ->
+            list.map {
+                it.toModel()
+            }
         }
     }
 }

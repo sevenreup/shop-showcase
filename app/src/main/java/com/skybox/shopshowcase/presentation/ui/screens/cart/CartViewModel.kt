@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skybox.shopshowcase.R
 import com.skybox.shopshowcase.data.repository.CartRepository
-import com.skybox.shopshowcase.data.repository.OrderRepository
+import com.skybox.shopshowcase.data.repository.IOrderRepository
 import com.skybox.shopshowcase.data.repository.ProductRepository
 import com.skybox.shopshowcase.domain.model.Cart
 import com.skybox.shopshowcase.domain.model.CartItem
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CartViewModel @Inject constructor(
     private val cartRepository: CartRepository,
-    private val orderRepository: OrderRepository,
+    private val orderRepository: IOrderRepository,
     private val productRepository: ProductRepository
 ) : ViewModel() {
     val relatedProducts = MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)

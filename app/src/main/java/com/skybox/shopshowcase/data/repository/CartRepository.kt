@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class CartRepository @Inject constructor(private val cartDao: CartDao) {
+class CartRepository @Inject constructor(private val cartDao: CartDao) : ICartRepository {
 
-    suspend fun addToCart(productId: Int, quantity: Int) {
+    override suspend fun addToCart(productId: Int, quantity: Int) {
         val existingCartItem = cartDao.getCartItemWithProduct(productId)
 
         if (existingCartItem != null) {
@@ -22,7 +22,7 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         }
     }
 
-    suspend fun updateItem(productId: Int, quantity: Int) {
+    override suspend fun updateItem(productId: Int, quantity: Int) {
         val existingCartItem = cartDao.getCartItem(productId)
 
         if (existingCartItem != null) {
@@ -30,7 +30,7 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         }
     }
 
-    suspend fun removeFromCart(productId: Int) {
+    override suspend fun removeFromCart(productId: Int) {
         val existingCartItem = cartDao.getCartItemWithProduct(productId)
 
         if (existingCartItem != null) {
@@ -38,13 +38,15 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         }
     }
 
-    fun getCartItems(): Flow<List<CartItem>> = cartDao.getAllCartItemsWithProduct().map { list ->
-        list.map {
-            it.toModel()
+    override fun getCartItems(): Flow<List<CartItem>> {
+        return cartDao.getAllCartItemsWithProduct().map { list ->
+            list.map {
+                it.toModel()
+            }
         }
     }
 
-    suspend fun clearCartItems() {
+    override suspend fun clearCartItems() {
         cartDao.deleteAllCartItems()
     }
 }

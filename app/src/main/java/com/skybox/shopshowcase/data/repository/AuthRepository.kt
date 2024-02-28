@@ -9,20 +9,20 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth) {
-    fun isLoggedIn(): Boolean {
+class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth) : IAuthRepository {
+    override fun isLoggedIn(): Boolean {
         return firebaseAuth.currentUser != null
     }
 
-    fun currentUser(): User {
+    override fun currentUser(): User {
         return firebaseAuth.currentUser!!.toModel()
     }
 
-    fun logout() {
+    override fun logout() {
         firebaseAuth.signOut()
     }
 
-    fun listenToAuth(): Flow<Boolean> {
+    override fun listenToAuth(): Flow<Boolean> {
         return callbackFlow {
             val listener = FirebaseAuth.AuthStateListener { auth ->
                 val user = auth.currentUser
