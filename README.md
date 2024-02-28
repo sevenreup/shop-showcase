@@ -1,4 +1,4 @@
-# Shop Shwocase
+# Shop Showcase
 
 ## Overview
 
@@ -48,8 +48,6 @@ Follow the steps below to set up and run the project on your local machine:
 6. **Run the App:**
 
    Connect an Android device or use an emulator, and click the "Run" button in Android Studio to install and launch the app.
-
-## Setup Google sign-in
 
 ## Room Database Setup
 
