@@ -13,7 +13,8 @@ Before setting up the project, ensure that you have the following prerequisites 
 
 ## Download
 
-You can download a prebuilt version of the app from the releases
+You can download a prebuilt version of the app from the releases.
+[Recent release](https://github.com/sevenreup/shop-showcase/releases/tag/1.0)
 
 ## Getting Started
 
