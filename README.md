@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Android Kotlin project is a shopping cart app that allows users to add items to a cart, update the cart, and proceed to checkout. The app utilizes Room Database to store and manage product data efficiently. This README file provides instructions on setting up and running the project.
+This Android Kotlin [project](https://github.com/sevenreup/shop-showcase.git) is a shopping cart app that allows users to add items to a cart, update the cart, and proceed to checkout. The app utilizes Room Database to store and manage product data efficiently. This README file provides instructions on setting up and running the project.
 
 ## Prerequisites
 
