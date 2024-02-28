@@ -34,19 +34,21 @@ android {
         }
     }
 
+    signingConfigs {
+        if (keystoreProperties.isNotEmpty()) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = project.properties["storeFile"]?.let { file(it) }
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
     buildTypes {
         release {
-            signingConfigs {
-                if (keystoreProperties.isNotEmpty()) {
-                    create("release") {
-                        keyAlias = keystoreProperties["keyAlias"] as String
-                        keyPassword = keystoreProperties["keyPassword"] as String
-                        storeFile = project.properties["storeFile"]?.let { file(it) }
-                        storePassword = keystoreProperties["storePassword"] as String
-                    }
-                }
-            }
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
