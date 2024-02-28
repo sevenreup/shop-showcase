@@ -1,3 +1,7 @@
+import java.io.File
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     kotlin("kapt")
     id("com.android.application")
@@ -5,6 +9,13 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
 }
+
+val keystoreProperties = Properties()
+val keystorePropertiesFile: File = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 
 android {
     namespace = "com.skybox.shopshowcase"
@@ -25,11 +36,22 @@ android {
 
     buildTypes {
         release {
+            signingConfigs {
+                if (keystoreProperties.isNotEmpty()) {
+                    create("release") {
+                        keyAlias = keystoreProperties["keyAlias"] as String
+                        keyPassword = keystoreProperties["keyPassword"] as String
+                        storeFile = project.properties["storeFile"]?.let { file(it) }
+                        storePassword = keystoreProperties["storePassword"] as String
+                    }
+                }
+            }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {
