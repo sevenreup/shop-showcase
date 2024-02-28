@@ -7,10 +7,10 @@ import com.skybox.shopshowcase.R
 import com.skybox.shopshowcase.data.repository.CartRepository
 import com.skybox.shopshowcase.data.repository.OrderRepository
 import com.skybox.shopshowcase.data.repository.ProductRepository
-import com.skybox.shopshowcase.domain.Cart
-import com.skybox.shopshowcase.domain.CartItem
-import com.skybox.shopshowcase.domain.LoadableState
-import com.skybox.shopshowcase.domain.Product
+import com.skybox.shopshowcase.domain.model.Cart
+import com.skybox.shopshowcase.domain.model.CartItem
+import com.skybox.shopshowcase.domain.model.LoadableState
+import com.skybox.shopshowcase.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

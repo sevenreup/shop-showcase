@@ -1,4 +1,4 @@
-package com.skybox.shopshowcase.domain
+package com.skybox.shopshowcase.domain.model
 
 sealed class LoadableState<out T> {
     data object Loading : LoadableState<Nothing>()

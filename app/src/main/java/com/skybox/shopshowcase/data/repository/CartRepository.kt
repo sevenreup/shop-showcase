@@ -1,9 +1,9 @@
 package com.skybox.shopshowcase.data.repository
 
 import com.skybox.shopshowcase.data.entities.CartItemEntity
-import com.skybox.shopshowcase.data.entities.CartItemWithProduct
 import com.skybox.shopshowcase.data.source.local.CartDao
-import com.skybox.shopshowcase.domain.CartItem
+import com.skybox.shopshowcase.data.source.local.mappers.CartEntityMapper.toModel
+import com.skybox.shopshowcase.domain.model.CartItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -38,21 +38,13 @@ class CartRepository @Inject constructor(private val cartDao: CartDao) {
         }
     }
 
-    fun getCartItems(): Flow<List<CartItem>> = cartDao.getAllCartItemsWithProduct().map {list ->
-        list.map { item ->
-            CartItem(
-                productId = item.product.productId,
-                cartItemId = item.cartItem.cartItemId,
-                productName = item.product.name,
-                image = item.product.thumbnail,
-                quantity = item.cartItem.quantity,
-                price = item.product.price,
-                brand = item.product.brand,
-            )
+    fun getCartItems(): Flow<List<CartItem>> = cartDao.getAllCartItemsWithProduct().map { list ->
+        list.map {
+            it.toModel()
         }
     }
 
-   suspend fun clearCartItems() {
+    suspend fun clearCartItems() {
         cartDao.deleteAllCartItems()
     }
 }

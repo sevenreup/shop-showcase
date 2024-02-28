@@ -36,8 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.compose.rememberGlidePreloadingData
-import com.skybox.shopshowcase.domain.Cart
-import com.skybox.shopshowcase.domain.CartItem
+import com.skybox.shopshowcase.domain.model.Cart
+import com.skybox.shopshowcase.domain.model.CartItem
 import com.skybox.shopshowcase.presentation.ui.components.EmptyState
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.presentation.ui.components.QuantityRow

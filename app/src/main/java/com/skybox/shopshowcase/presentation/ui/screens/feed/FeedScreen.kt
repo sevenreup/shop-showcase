@@ -30,10 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.compose.rememberGlidePreloadingData
-import com.skybox.shopshowcase.domain.Product
+import com.skybox.shopshowcase.domain.model.Product
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.presentation.ui.components.ShimmerGrid
-import com.skybox.shopshowcase.presentation.ui.components.ShimmerList
 import com.skybox.shopshowcase.util.formatCurrency
 import com.skybox.shopshowcase.util.toProductRoute
 

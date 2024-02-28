@@ -1,7 +1,8 @@
 package com.skybox.shopshowcase.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
-import com.skybox.shopshowcase.domain.User
+import com.skybox.shopshowcase.data.source.local.mappers.UserMapper.toModel
+import com.skybox.shopshowcase.domain.model.User
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -14,13 +15,7 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth)
     }
 
     fun currentUser(): User {
-        val currentUser = firebaseAuth.currentUser!!
-        return User(
-            id = currentUser.uid,
-            email = currentUser.email,
-            username = currentUser.displayName ?: "",
-            profileImage = currentUser.photoUrl?.toString()
-        )
+        return firebaseAuth.currentUser!!.toModel()
     }
 
     fun logout() {

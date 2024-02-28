@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skybox.shopshowcase.data.repository.CartRepository
 import com.skybox.shopshowcase.data.repository.ProductRepository
-import com.skybox.shopshowcase.domain.Product
+import com.skybox.shopshowcase.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

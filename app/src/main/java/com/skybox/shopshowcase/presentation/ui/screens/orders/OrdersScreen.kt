@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -30,7 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.skybox.shopshowcase.R
-import com.skybox.shopshowcase.domain.Order
+import com.skybox.shopshowcase.domain.model.Order
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.util.format
 import com.skybox.shopshowcase.util.formatCurrency

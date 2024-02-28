@@ -1,4 +1,4 @@
-package com.skybox.shopshowcase.domain
+package com.skybox.shopshowcase.domain.model
 
 import com.bumptech.glide.signature.ObjectKey
 

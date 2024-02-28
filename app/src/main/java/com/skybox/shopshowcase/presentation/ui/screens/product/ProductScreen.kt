@@ -43,9 +43,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.skybox.shopshowcase.R
-import com.skybox.shopshowcase.domain.LoadableState
-import com.skybox.shopshowcase.domain.Product
-import com.skybox.shopshowcase.domain.ProductDetails
+import com.skybox.shopshowcase.domain.model.LoadableState
+import com.skybox.shopshowcase.domain.model.Product
+import com.skybox.shopshowcase.domain.model.ProductDetails
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.util.formatCurrency
 

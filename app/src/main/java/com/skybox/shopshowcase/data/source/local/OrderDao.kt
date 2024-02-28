@@ -7,7 +7,7 @@ import androidx.room.Transaction
 import com.skybox.shopshowcase.data.entities.OrderEntity
 import com.skybox.shopshowcase.data.entities.OrderItemEntity
 import com.skybox.shopshowcase.data.entities.OrderWithItems
-import com.skybox.shopshowcase.domain.CartItem
+import com.skybox.shopshowcase.domain.model.CartItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
