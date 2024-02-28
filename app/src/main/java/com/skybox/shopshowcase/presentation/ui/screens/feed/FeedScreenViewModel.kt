@@ -7,6 +7,7 @@ import com.skybox.shopshowcase.data.repository.ProductRepository
 import com.skybox.shopshowcase.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,17 +16,17 @@ class FeedScreenViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val cartRepository: CartRepository
 ) : ViewModel() {
-    val state = MutableStateFlow(HomeUIState(listOf()))
-
+    private val _state = MutableStateFlow(HomeUIState(listOf()))
+    val state = _state.asStateFlow()
     init {
         fetch()
     }
 
     private fun fetch() {
         viewModelScope.launch {
-            state.emit(HomeUIState(listOf(), true))
+            _state.emit(HomeUIState(listOf(), true))
             val products = productRepository.getProducts()
-            state.emit(HomeUIState(products))
+            _state.emit(HomeUIState(products))
         }
 
     }

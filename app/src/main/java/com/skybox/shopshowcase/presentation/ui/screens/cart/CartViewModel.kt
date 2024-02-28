@@ -14,6 +14,7 @@ import com.skybox.shopshowcase.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,15 +25,19 @@ class CartViewModel @Inject constructor(
     private val orderRepository: IOrderRepository,
     private val productRepository: ProductRepository
 ) : ViewModel() {
-    val relatedProducts = MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)
+    private val _relatedProducts =
+        MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)
+    val relatedProducts = _relatedProducts.asStateFlow()
+
+    private val _state = MutableStateFlow<CartScreenState>(CartScreenState.Idle)
+    val state = _state.asStateFlow()
+
     val cartFlow: Flow<Cart> = cartRepository.getCartItems().map { cartItemsWithProduct ->
         val total = calculateTotal(cartItemsWithProduct)
         val cartState = Cart(total, cartItemsWithProduct)
         fetchRelatedProducts(cartItemsWithProduct)
         cartState
     }
-
-    val state = MutableStateFlow<CartScreenState>(CartScreenState.Idle)
 
     private fun calculateTotal(cartItems: List<CartItem>): Double {
         return cartItems.sumOf { it.quantity * it.price }
@@ -41,11 +46,11 @@ class CartViewModel @Inject constructor(
     fun placeOrder(cart: Cart) {
         viewModelScope.launch {
             try {
-                state.emit(CartScreenState.IsBusy)
+                _state.emit(CartScreenState.IsBusy)
                 orderRepository.placeOrder(cart.cartItems, cart.total)
-                state.emit(CartScreenState.OrderPlacedSuccessful)
+                _state.emit(CartScreenState.OrderPlacedSuccessful)
             } catch (e: Exception) {
-                state.emit(CartScreenState.Error(R.string.order_failed))
+                _state.emit(CartScreenState.Error(R.string.order_failed))
             }
         }
     }
@@ -53,11 +58,11 @@ class CartViewModel @Inject constructor(
     fun incrementCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             try {
-                state.value = CartScreenState.IsBusy
+                _state.value = CartScreenState.IsBusy
                 cartRepository.updateItem(cartItem.productId, cartItem.quantity + 1)
-                state.emit(CartScreenState.CartUpdateSuccessful)
+                _state.emit(CartScreenState.CartUpdateSuccessful)
             } catch (e: Exception) {
-                state.value = CartScreenState.Error(R.string.cart_update_failed)
+                _state.value = CartScreenState.Error(R.string.cart_update_failed)
             }
         }
     }
@@ -65,14 +70,14 @@ class CartViewModel @Inject constructor(
     fun decrementCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             try {
-                state.emit(CartScreenState.IsBusy)
+                _state.emit(CartScreenState.IsBusy)
                 val quantity = cartItem.quantity - 1
                 if (quantity > 0) {
                     cartRepository.updateItem(cartItem.productId, quantity)
                 }
-                state.emit(CartScreenState.CartUpdateSuccessful)
+                _state.emit(CartScreenState.CartUpdateSuccessful)
             } catch (e: Exception) {
-                state.emit(CartScreenState.Error(R.string.cart_update_failed))
+                _state.emit(CartScreenState.Error(R.string.cart_update_failed))
             }
         }
     }
@@ -80,11 +85,11 @@ class CartViewModel @Inject constructor(
     fun removeFromCart(productId: Int) {
         viewModelScope.launch {
             try {
-                state.emit(CartScreenState.IsBusy)
+                _state.emit(CartScreenState.IsBusy)
                 cartRepository.removeFromCart(productId)
-                state.emit(CartScreenState.CartUpdateSuccessful)
+                _state.emit(CartScreenState.CartUpdateSuccessful)
             } catch (e: Exception) {
-                state.emit(CartScreenState.Error(R.string.cart_update_failed))
+                _state.emit(CartScreenState.Error(R.string.cart_update_failed))
             }
         }
     }
@@ -92,18 +97,18 @@ class CartViewModel @Inject constructor(
     fun clearCart() {
         viewModelScope.launch {
             try {
-                state.emit(CartScreenState.IsBusy)
+                _state.emit(CartScreenState.IsBusy)
                 cartRepository.clearCartItems()
-                state.emit(CartScreenState.CartUpdateSuccessful)
+                _state.emit(CartScreenState.CartUpdateSuccessful)
             } catch (e: Exception) {
-                state.emit(CartScreenState.Error(R.string.cart_update_failed))
+                _state.emit(CartScreenState.Error(R.string.cart_update_failed))
             }
         }
     }
 
     private fun fetchRelatedProducts(cartItemsWithProduct: List<CartItem>) {
         viewModelScope.launch {
-            relatedProducts.emit(LoadableState.Loading)
+            _relatedProducts.emit(LoadableState.Loading)
             val brand = mutableSetOf<String>()
             var pair = Pair(0.0, 0.0)
             cartItemsWithProduct.forEach {
@@ -120,7 +125,7 @@ class CartViewModel @Inject constructor(
                 pair.first,
                 pair.second
             )
-            relatedProducts.emit(LoadableState.Success(products))
+            _relatedProducts.emit(LoadableState.Success(products))
         }
     }
 }

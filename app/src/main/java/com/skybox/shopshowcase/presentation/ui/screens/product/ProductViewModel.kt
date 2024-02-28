@@ -9,6 +9,7 @@ import com.skybox.shopshowcase.domain.model.Product
 import com.skybox.shopshowcase.domain.model.ProductDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,14 +18,18 @@ class ProductViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val cartRepository: CartRepository
 ) : ViewModel() {
-    val productDetails = MutableStateFlow<LoadableState<ProductDetails>>(LoadableState.Loading)
-    val relatedProducts = MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)
+    private val _productDetails = MutableStateFlow<LoadableState<ProductDetails>>(LoadableState.Loading)
+    val productDetails = _productDetails.asStateFlow()
+
+    private val _relatedProducts =
+        MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)
+    val relatedProducts = _relatedProducts.asStateFlow()
 
     fun loadProductInfo(productId: String) {
         viewModelScope.launch {
-            productDetails.emit(LoadableState.Loading)
+            _productDetails.emit(LoadableState.Loading)
             val product = productRepository.getProduct(productId.toInt()) ?: return@launch
-            productDetails.emit(LoadableState.Success(ProductDetails(product, listOf())))
+            _productDetails.emit(LoadableState.Success(ProductDetails(product, listOf())))
             getRecommendations(product)
         }
     }
@@ -39,13 +44,13 @@ class ProductViewModel @Inject constructor(
     }
 
     private suspend fun getRecommendations(product: Product) {
-        relatedProducts.emit(LoadableState.Loading)
+        _relatedProducts.emit(LoadableState.Loading)
         val products = productRepository.getRecommendedProducts(
             listOf(product.brand),
             product.price - 50,
             product.price + 50
         )
-        relatedProducts.emit(LoadableState.Success(products))
+        _relatedProducts.emit(LoadableState.Success(products))
     }
 }
 
