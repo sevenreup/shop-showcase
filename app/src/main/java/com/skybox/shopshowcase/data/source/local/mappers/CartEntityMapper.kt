@@ -13,6 +13,7 @@ object CartEntityMapper {
             quantity = this.cartItem.quantity,
             price = this.product.price,
             brand = this.product.brand,
+            category = Pair(product.categoryId, "")
         )
     }
 }

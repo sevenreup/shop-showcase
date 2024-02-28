@@ -41,12 +41,13 @@ import com.skybox.shopshowcase.domain.model.CartItem
 import com.skybox.shopshowcase.presentation.ui.components.EmptyState
 import com.skybox.shopshowcase.presentation.ui.components.ProductImage
 import com.skybox.shopshowcase.presentation.ui.components.QuantityRow
-import com.skybox.shopshowcase.presentation.ui.screens.product.RecommendedProducts
+import com.skybox.shopshowcase.presentation.ui.components.RecommendedProducts
 import com.skybox.shopshowcase.util.formatCurrency
+import com.skybox.shopshowcase.util.toProductRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
+fun CartScreen(navigate: (route: String) -> Unit, viewModel: CartViewModel = hiltViewModel()) {
     val cart by viewModel.cartFlow.collectAsState(Cart())
     val relatedState by viewModel.relatedProducts.collectAsState()
     val isCartEmpty = cart.cartItems.isEmpty()
@@ -127,7 +128,9 @@ fun CartScreen(viewModel: CartViewModel = hiltViewModel()) {
                         decrement = { viewModel.decrementCartItem(item) })
                 }
                 item {
-                    RecommendedProducts(relatedState = relatedState)
+                    RecommendedProducts(onClick = {
+                        navigate(it.toProductRoute())
+                    },relatedState = relatedState)
                 }
             }
         }

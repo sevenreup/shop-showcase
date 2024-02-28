@@ -2,8 +2,8 @@ package com.skybox.shopshowcase.presentation.ui.screens.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.skybox.shopshowcase.data.repository.CartRepository
-import com.skybox.shopshowcase.data.repository.ProductRepository
+import com.skybox.shopshowcase.data.repository.ICartRepository
+import com.skybox.shopshowcase.data.repository.IProductRepository
 import com.skybox.shopshowcase.domain.model.LoadableState
 import com.skybox.shopshowcase.domain.model.Product
 import com.skybox.shopshowcase.domain.model.ProductDetails
@@ -15,10 +15,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    private val productRepository: ProductRepository,
-    private val cartRepository: CartRepository
+    private val productRepository: IProductRepository,
+    private val cartRepository: ICartRepository
 ) : ViewModel() {
-    private val _productDetails = MutableStateFlow<LoadableState<ProductDetails>>(LoadableState.Loading)
+    private val _productDetails =
+        MutableStateFlow<LoadableState<ProductDetails>>(LoadableState.Loading)
     val productDetails = _productDetails.asStateFlow()
 
     private val _relatedProducts =
@@ -46,9 +47,11 @@ class ProductViewModel @Inject constructor(
     private suspend fun getRecommendations(product: Product) {
         _relatedProducts.emit(LoadableState.Loading)
         val products = productRepository.getRecommendedProducts(
-            listOf(product.brand),
-            product.price - 50,
-            product.price + 50
+            brands = listOf(product.brand),
+            categories = listOf(product.category.first),
+            filterOut = listOf(product.productId),
+            priceLower = 0.0,
+            priceUpper = product.price + 50,
         )
         _relatedProducts.emit(LoadableState.Success(products))
     }

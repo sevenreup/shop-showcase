@@ -11,7 +11,7 @@ data class Product(
     val price: Double,
     val brand: String,
     val rating: Double,
-    val categories: List<String>
+    val category: Pair<Int, String>
 ){
     fun signature() = ObjectKey(productId)
 }

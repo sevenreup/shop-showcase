@@ -4,9 +4,9 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skybox.shopshowcase.R
-import com.skybox.shopshowcase.data.repository.CartRepository
+import com.skybox.shopshowcase.data.repository.ICartRepository
 import com.skybox.shopshowcase.data.repository.IOrderRepository
-import com.skybox.shopshowcase.data.repository.ProductRepository
+import com.skybox.shopshowcase.data.repository.IProductRepository
 import com.skybox.shopshowcase.domain.model.Cart
 import com.skybox.shopshowcase.domain.model.CartItem
 import com.skybox.shopshowcase.domain.model.LoadableState
@@ -21,9 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val cartRepository: CartRepository,
+    private val cartRepository: ICartRepository,
     private val orderRepository: IOrderRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: IProductRepository
 ) : ViewModel() {
     private val _relatedProducts =
         MutableStateFlow<LoadableState<List<Product>>>(LoadableState.Loading)
@@ -110,9 +110,13 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch {
             _relatedProducts.emit(LoadableState.Loading)
             val brand = mutableSetOf<String>()
+            val productIds = mutableSetOf<Int>()
+            val categoryIds = mutableSetOf<Int>()
             var pair = Pair(0.0, 0.0)
             cartItemsWithProduct.forEach {
                 brand.add(it.brand)
+                productIds.add(it.productId)
+                categoryIds.add(it.category.first)
                 if (it.price < pair.first) {
                     pair = pair.copy(first = it.price)
                 }
@@ -121,9 +125,11 @@ class CartViewModel @Inject constructor(
                 }
             }
             val products = productRepository.getRecommendedProducts(
-                brand.toList(),
-                pair.first,
-                pair.second
+                brands = brand.toList(),
+                categories = categoryIds.toList(),
+                filterOut = productIds.toList(),
+                priceLower = pair.first,
+                priceUpper = pair.second,
             )
             _relatedProducts.emit(LoadableState.Success(products))
         }

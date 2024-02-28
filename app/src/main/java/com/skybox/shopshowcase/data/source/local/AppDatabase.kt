@@ -13,13 +13,12 @@ import com.skybox.shopshowcase.data.entities.CartItemEntity
 import com.skybox.shopshowcase.data.entities.CategoryEntity
 import com.skybox.shopshowcase.data.entities.OrderEntity
 import com.skybox.shopshowcase.data.entities.OrderItemEntity
-import com.skybox.shopshowcase.data.entities.ProductCategoryCrossRef
 import com.skybox.shopshowcase.data.entities.ProductEntity
 import com.skybox.shopshowcase.data.source.local.converters.Converters
 import com.skybox.shopshowcase.workers.DatabaseSeederWorker
 
 @Database(
-    entities = [ProductEntity::class, CategoryEntity::class, ProductCategoryCrossRef::class, CartItemEntity::class, OrderEntity::class, OrderItemEntity::class],
+    entities = [ProductEntity::class, CategoryEntity::class, CartItemEntity::class, OrderEntity::class, OrderItemEntity::class],
     version = 1
 )
 @TypeConverters(Converters::class)

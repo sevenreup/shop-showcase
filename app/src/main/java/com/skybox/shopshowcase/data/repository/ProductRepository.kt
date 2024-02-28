@@ -19,16 +19,27 @@ class ProductRepository @Inject constructor(private val productDao: ProductDao) 
 
     override suspend fun getRecommendedProducts(
         brands: List<String>,
+        categories: List<Int>,
+        filterOut: List<Int>,
         priceLower: Double,
         priceUpper: Double
     ): List<Product> {
         val recommendedByBrand =
-            productDao.getByBrand(brands)
-        val recommendedByPrice = productDao.getRecommendedProductsByPriceRange(
-            priceLower,
-            priceUpper
+            productDao.getProductRecommendations(brand = brands, filterOut = filterOut)
+        val recommendedByPrice = productDao.getRecommendedByPriceRangeAndCategory(
+            minPrice = priceLower,
+            maxPrice = priceUpper,
+            categories = categories,
+            filterOut = filterOut,
         )
-        return (recommendedByBrand + recommendedByPrice).distinctBy { it.product.productId }.map {
+        var recommendations =
+            (recommendedByBrand + recommendedByPrice).distinctBy { it.product.productId }
+
+        if (recommendations.isEmpty()) {
+            recommendations = productDao.getRecommendedByCategory(categories, filterOut)
+        }
+
+        return recommendations.map {
             it.toModel()
         }
     }

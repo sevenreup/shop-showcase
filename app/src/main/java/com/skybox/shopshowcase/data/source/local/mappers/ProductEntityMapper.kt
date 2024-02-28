@@ -1,9 +1,9 @@
 package com.skybox.shopshowcase.data.source.local.mappers
 
-import com.skybox.shopshowcase.data.entities.ProductWithCategories
+import com.skybox.shopshowcase.data.entities.ProductAndCategory
 import com.skybox.shopshowcase.domain.model.Product
 object ProductEntityMapper  {
-     fun ProductWithCategories.toModel(): Product {
+     fun ProductAndCategory.toModel(): Product {
         return Product(
             productId = product.productId,
             name = product.name,
@@ -11,7 +11,7 @@ object ProductEntityMapper  {
             images = product.images,
             thumbnail = product.thumbnail,
             price = product.price,
-            categories = categories.map { it.categoryName },
+            category = Pair(category.categoryId, category.categoryName),
             rating = product.rating,
             brand = product.brand
         )

@@ -9,6 +9,8 @@ interface IProductRepository {
 
     suspend fun getRecommendedProducts(
         brands: List<String>,
+        categories: List<Int>,
+        filterOut: List<Int>,
         priceLower: Double,
         priceUpper: Double
     ): List<Product>

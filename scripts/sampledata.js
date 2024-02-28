@@ -10,7 +10,6 @@ fs.readFile("sample.json", "utf8", (err, data) => {
   const products = [];
   let categoryId = 1;
   const categoryMap = {};
-  const productCategoryCrossRefs = [];
 
   jsonData.products.forEach((product) => {
     let category = categoryMap[product.category];
@@ -23,10 +22,6 @@ fs.readFile("sample.json", "utf8", (err, data) => {
       categoryMap[product.category] = category;
       categoryId = categoryId + 1;
     }
-    productCategoryCrossRefs.push({
-      productId: product.id,
-      categoryId: category.categoryId,
-    });
     products.push({
       productId: product.id,
       name: product.title,
@@ -36,14 +31,13 @@ fs.readFile("sample.json", "utf8", (err, data) => {
       rating: product.rating,
       brand: product.brand,
       thumbnail: product.thumbnail,
-      categories: [category.categoryId],
+      categoryId: category.categoryId,
     });
   });
 
   const output = {
     products,
     categories: Object.entries(categoryMap).map((e) => e[1]),
-    productCategoryCrossRefs,
   };
 
   const modifiedData = JSON.stringify(output, null, 2);

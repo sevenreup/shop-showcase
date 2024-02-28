@@ -8,7 +8,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.skybox.shopshowcase.data.entities.CategoryEntity
-import com.skybox.shopshowcase.data.entities.ProductCategoryCrossRef
 import com.skybox.shopshowcase.data.entities.ProductEntity
 import com.skybox.shopshowcase.data.source.local.AppDatabase
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,6 @@ class DatabaseSeederWorker(
 
                         productDao.insertCategories(seedData.categories)
                         productDao.upsertAll(seedData.products)
-                        productDao.insertProductCategoryCrossRef(seedData.productCategoryCrossRefs)
 
                         Result.success()
                     }
@@ -53,6 +51,5 @@ class DatabaseSeederWorker(
 
 data class SeederData(
     val products: List<ProductEntity>,
-    val categories: List<CategoryEntity>,
-    val productCategoryCrossRefs: List<ProductCategoryCrossRef>
+    val categories: List<CategoryEntity>
 )

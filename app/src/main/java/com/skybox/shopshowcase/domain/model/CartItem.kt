@@ -9,7 +9,8 @@ data class CartItem(
     val productName: String,
     val brand: String,
     val quantity: Int,
-    val price: Double
+    val price: Double,
+    val category: Pair<Int, String>
 ){
     fun signature() = ObjectKey(productId)
 }

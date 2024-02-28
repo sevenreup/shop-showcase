@@ -3,6 +3,8 @@ package com.skybox.shopshowcase.presentation.ui.screens.feed
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.skybox.shopshowcase.data.repository.CartRepository
+import com.skybox.shopshowcase.data.repository.ICartRepository
+import com.skybox.shopshowcase.data.repository.IProductRepository
 import com.skybox.shopshowcase.data.repository.ProductRepository
 import com.skybox.shopshowcase.domain.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeedScreenViewModel @Inject constructor(
-    private val productRepository: ProductRepository,
-    private val cartRepository: CartRepository
+    private val productRepository: IProductRepository,
+    private val cartRepository: ICartRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(HomeUIState(listOf()))
     val state = _state.asStateFlow()

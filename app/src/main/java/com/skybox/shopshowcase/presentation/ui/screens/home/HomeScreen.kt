@@ -97,7 +97,8 @@ fun HomeScreen(navController: NavHostController) {
 }
 
 fun NavGraphBuilder.createNavGraph(
-    snackBarHostState: SnackbarHostState, navigateToRoute: (route: String) -> Unit,
+    snackBarHostState: SnackbarHostState,
+    navigateToRoute: (route: String) -> Unit,
     navigateBack: () -> Unit
 ) {
     composable("/") {
@@ -110,13 +111,13 @@ fun NavGraphBuilder.createNavGraph(
         arguments = listOf(navArgument("id") { type = NavType.StringType })
     ) { backStackEntry ->
         val productId = backStackEntry.arguments?.getString("id") ?: ""
-        ProductScreen(productId, navigateBack = navigateBack)
+        ProductScreen(productId, navigateBack = navigateBack, navigate = navigateToRoute)
     }
     composable("/profile") {
         ProfileScreen(navigate = navigateToRoute)
     }
     composable("/cart") {
-        CartScreen()
+        CartScreen(navigate = navigateToRoute)
     }
     composable("/orders") {
         OrdersScreen(navigateBack = navigateBack)
